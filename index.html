@@ -264,7 +264,6 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
   box-shadow:inset 0 0 20px rgba(0,0,0,0.4);
 }
 
-/* Texte qui monte du bas vers le haut */
 .poeme-scroll{
   position:absolute;
   bottom:-100%;
@@ -282,6 +281,309 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
 
 .poeme-scroll p{
   margin:6px 0;
+}
+
+/* PAGE FINALE ULTIME */
+#p7{
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:none;
+  background:#000;
+}
+
+#p7.active{
+  display:block;
+}
+
+.final-section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:60px 20px;
+  position:relative;
+}
+
+/* SECTION 1 : CIEL ÉTOILÉ */
+#starrySection{
+  background:linear-gradient(180deg, #0a0a15 0%, #1a0a2e 50%, #0f0f1a 100%);
+}
+
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:0.3;}
+  50%{opacity:1;}
+}
+
+.shooting-star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  box-shadow:0 0 10px 2px white;
+  animation:shoot 3s ease-out forwards;
+}
+
+@keyframes shoot{
+  0%{
+    transform:translateX(0) translateY(0);
+    opacity:1;
+  }
+  100%{
+    transform:translateX(300px) translateY(300px);
+    opacity:0;
+  }
+}
+
+.constellation-heart{
+  position:relative;
+  z-index:2;
+  font-size:150px;
+  animation:heartBeat 2s infinite;
+  filter:drop-shadow(0 0 30px #ff4d88) drop-shadow(0 0 60px #ff4d88);
+}
+
+@keyframes heartBeat{
+  0%,100%{transform:scale(1);}
+  25%{transform:scale(1.15);}
+  50%{transform:scale(1);}
+}
+
+/* SECTION 2 : BOULE DE CRISTAL */
+#crystalSection{
+  background:linear-gradient(180deg, #0f0f1a 0%, #1a1a3e 50%, #000 100%);
+}
+
+.crystal-ball-container{
+  position:relative;
+  width:400px;
+  height:400px;
+  margin:40px auto;
+}
+
+.crystal-ball{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.4), rgba(138,43,226,0.3), rgba(75,0,130,0.5), rgba(30,0,60,0.8));
+  box-shadow:
+    0 0 60px rgba(138,43,226,0.8),
+    0 0 120px rgba(138,43,226,0.6),
+    0 0 180px rgba(138,43,226,0.4),
+    inset 0 0 60px rgba(255,255,255,0.2),
+    inset -30px -30px 60px rgba(138,43,226,0.3);
+  animation:crystalGlow 4s ease-in-out infinite;
+  position:relative;
+  overflow:hidden;
+}
+
+@keyframes crystalGlow{
+  0%,100%{
+    box-shadow:
+      0 0 60px rgba(138,43,226,0.8),
+      0 0 120px rgba(138,43,226,0.6),
+      0 0 180px rgba(138,43,226,0.4),
+      inset 0 0 60px rgba(255,255,255,0.2),
+      inset -30px -30px 60px rgba(138,43,226,0.3);
+    transform:scale(1);
+  }
+  50%{
+    box-shadow:
+      0 0 80px rgba(138,43,226,1),
+      0 0 160px rgba(138,43,226,0.8),
+      0 0 240px rgba(138,43,226,0.6),
+      inset 0 0 80px rgba(255,255,255,0.3),
+      inset -40px -40px 80px rgba(138,43,226,0.4);
+    transform:scale(1.05);
+  }
+}
+
+.crystal-shine{
+  position:absolute;
+  top:15%;
+  left:25%;
+  width:100px;
+  height:100px;
+  background:radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0.4), transparent);
+  border-radius:50%;
+  animation:shine 3s ease-in-out infinite;
+}
+
+@keyframes shine{
+  0%,100%{
+    opacity:0.6;
+    transform:scale(1);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.2);
+  }
+}
+
+.crystal-glow-ring{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:3px solid rgba(138,43,226,0.5);
+  transform:translate(-50%,-50%);
+  animation:pulseRing 3s ease-in-out infinite;
+}
+
+@keyframes pulseRing{
+  0%,100%{
+    transform:translate(-50%,-50%) scale(1);
+    opacity:0.5;
+  }
+  50%{
+    transform:translate(-50%,-50%) scale(1.2);
+    opacity:0.8;
+  }
+}
+
+.crystal-particles{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  overflow:hidden;
+}
+
+.particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:rgba(255,255,255,0.8);
+  border-radius:50%;
+  animation:float 4s infinite;
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translateY(0) translateX(0);
+    opacity:0;
+  }
+  10%{
+    opacity:1;
+  }
+  90%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-100px) translateX(var(--x));
+    opacity:0;
+  }
+}
+
+.crystal-content{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:70%;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  color:white;
+  text-shadow:
+    0 0 10px rgba(255,255,255,1),
+    0 0 20px rgba(138,43,226,0.8),
+    0 0 30px rgba(138,43,226,0.6);
+  animation:textGlow 3s ease-in-out infinite;
+}
+
+@keyframes textGlow{
+  0%,100%{
+    text-shadow:
+      0 0 10px rgba(255,255,255,1),
+      0 0 20px rgba(138,43,226,0.8),
+      0 0 30px rgba(138,43,226,0.6);
+  }
+  50%{
+    text-shadow:
+      0 0 15px rgba(255,255,255,1),
+      0 0 30px rgba(138,43,226,1),
+      0 0 45px rgba(138,43,226,0.8);
+  }
+}
+
+/* TO BE CONTINUED */
+.to-be-continued{
+  font-size:80px;
+  font-weight:bold;
+  text-align:center;
+  background:linear-gradient(45deg, #ffd700, #ff8fab, #ff4d88);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:epicGlow 3s ease-in-out infinite;
+  letter-spacing:8px;
+  text-transform:uppercase;
+  margin:150px 0 200px 0;
+  position:relative;
+  z-index:10;
+  filter:drop-shadow(0 0 20px rgba(255,215,0,0.6)) drop-shadow(0 0 40px rgba(255,77,136,0.4));
+}
+
+@keyframes epicGlow{
+  0%,100%{
+    transform:scale(1);
+    filter:drop-shadow(0 0 20px rgba(255,215,0,0.6)) drop-shadow(0 0 40px rgba(255,77,136,0.4));
+  }
+  50%{
+    transform:scale(1.08);
+    filter:drop-shadow(0 0 40px rgba(255,215,0,1)) drop-shadow(0 0 80px rgba(255,77,136,0.8));
+  }
+}
+
+.cinema-bars{
+  position:fixed;
+  width:100%;
+  height:100px;
+  background:#000;
+  z-index:5;
+}
+
+.cinema-bar-top{
+  top:0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.8);
+}
+
+.cinema-bar-bottom{
+  bottom:0;
+  box-shadow:0 -10px 30px rgba(0,0,0,0.8);
+}
+
+.firework{
+  position:fixed;
+  width:4px;
+  height:4px;
+  background:#ff4d88;
+  border-radius:50%;
+  animation:fireworkFall 2s ease-out forwards;
+  z-index:9999;
+}
+
+@keyframes fireworkFall{
+  0%{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(500px) scale(0);
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -327,7 +629,7 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
   </div>
 </div>
 
-<!-- PAGE 4 SOUVENIRS AMÉLIORÉE -->
+<!-- PAGE 4 SOUVENIRS -->
 <div class="page" id="p4">
   <div class="card" style="max-width:750px;">
     <h2 style="
@@ -347,11 +649,11 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
     <div class="poeme-container">
       <div class="poeme-scroll">
 
-        <p>Je n’ai ni or, ni couronne,</p>
+        <p>Je n'ai ni or, ni couronne,</p>
         <p>des mots, parfois maladroits,</p>
         <p>Mais Il y a dans tes beaux yeux Hazel,</p>
         <p>toute la douceur de ta silhouette</p>
-        <p>qui m’enlace avec tendresse à chaque fois</p>
+        <p>qui m'enlace avec tendresse à chaque fois</p>
 
         <br>
 
@@ -362,7 +664,7 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
 
         <br>
 
-        <p>Je t’aime d’un amour qui tremble et brûle,</p>
+        <p>Je t'aime d'un amour qui tremble et brûle,</p>
         <p>Qui doute parfois, mais jamais ne ment,</p>
         <p>Le matin, je pense à toi sans recul,</p>
         <p>Et le soir, ton sourire me rend vivant.</p>
@@ -372,13 +674,13 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
         <p>Je promets mes mots, mes gestes et mes nuits,</p>
         <p>Je promets mes silences et mes pensées,</p>
         <p>Je promets que tu seras mon seul abri,</p>
-        <p>Dans la tempête, dans l’amour, dans la beauté.</p>
+        <p>Dans la tempête, dans l'amour, dans la beauté.</p>
 
         <br>
 
         <p>Quand je doute, je pense à toi,</p>
         <p>Et la vie retrouve son sens,</p>
-        <p>Justine, mon monde s’illumine,</p>
+        <p>Justine, mon monde s'illumine,</p>
         <p>Et tout devient parfait.</p>
 
       </div>
@@ -429,7 +731,7 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
     <h2>🎵 Ce n'est que le début...</h2>
     <p style="margin-bottom:20px;">
       Notre histoire ne fait que commencer ❤️  
-      Alors j’ai préparé une playlist pour toi…
+      Alors j'ai préparé une playlist pour toi…
     </p>
 
     <!-- PLAYLIST SPOTIFY -->
@@ -461,10 +763,43 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
     <h2 id="loveScore">0%</h2>
 
     <button onclick="addLove()">Ajoute de l'amour ❤️</button>
-    <button onclick="go(0)">Retour début</button>
   </div>
 </div>
 
+<!-- PAGE 7 FINALE ULTIME -->
+<div id="p7">
+  
+  <!-- Barres de cinéma -->
+  <div class="cinema-bars cinema-bar-top"></div>
+  <div class="cinema-bars cinema-bar-bottom"></div>
+  
+  <!-- SECTION 1 : CIEL ÉTOILÉ -->
+  <div class="final-section" id="starrySection">
+    <div class="constellation-heart">❤️</div>
+  </div>
+
+  <!-- SECTION 2 : BOULE DE CRISTAL -->
+  <div class="final-section" id="crystalSection">
+    <div class="crystal-ball-container">
+      <div class="crystal-glow-ring"></div>
+      <div class="crystal-ball">
+        <div class="crystal-shine"></div>
+        <div class="crystal-particles" id="crystalParticles"></div>
+        <div class="crystal-content" id="crystalText">
+          Notre Futur...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 : TO BE CONTINUED -->
+  <div class="final-section" style="background:#000;">
+    <div class="to-be-continued">
+      To Be<br>Continued...
+    </div>
+  </div>
+
+</div>
 
 <script>
 // Navigation
@@ -473,6 +808,7 @@ function go(n){
   document.getElementById("p"+n).classList.add("active");
   if(n===2) createHeartExplosion();
   if(n===5) initQuiz();
+  if(n===7) initFinalPage();
 }
 
 // Bouton NON qui fuit
@@ -487,7 +823,7 @@ non.onmouseover=()=>{
   non.style.top=Math.random()*(card.clientHeight-50)+"px";
 };
 
-// Bouton OUI - va vers la page de transition
+// Bouton OUI
 document.getElementById("oui").onclick = () => {
   go(2);
 };
@@ -528,7 +864,7 @@ function type(){
   }
 }
 
-// Observer pour démarrer le typing quand on arrive sur la page 3
+// Observer
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     if(mutation.target.id === 'p3' && mutation.target.classList.contains('active')){
@@ -551,7 +887,7 @@ setInterval(()=>{
   document.getElementById("compteur").innerText=j+" jours avec toi ❤️";
 },1000);
 
-// QUIZ - Questions
+// QUIZ
 const questions = [
   {
     question: "💕 Qui a dit 'je t'aime' en premier ?",
@@ -559,8 +895,8 @@ const questions = [
     correct: 0
   },
   {
-    question: " Qui est le plus fou/folle ?",
-    options: ["Moi ", "Clairement toi 😜"],
+    question: "🤪 Qui est le plus fou/folle ?",
+    options: ["Moi 🙃", "Clairement toi 😜"],
     correct: 1
   },
   {
@@ -574,11 +910,10 @@ const questions = [
     correct: 0
   },
   {
-    question: "🙋‍♂️Qui casse le plus de choses?",
-    options: ["🥺Je pense que c'est moi", "T'es quand même pas loin de moi😅"],
+    question: "🙋‍♂️ Qui casse le plus de choses?",
+    options: ["🥺 Je pense que c'est moi", "T'es quand même pas loin de moi😅"],
     correct: 1
   }
-
 ];
 
 let currentQuestion = 0;
@@ -614,10 +949,8 @@ function selectAnswer(selectedIdx){
   const q = questions[currentQuestion];
   const buttons = document.querySelectorAll('.quiz-btn');
   
-  // Désactiver tous les boutons
   buttons.forEach(btn => btn.disabled = true);
   
-  // Marquer la réponse
   if(selectedIdx === q.correct){
     buttons[selectedIdx].classList.add('correct');
     score++;
@@ -627,7 +960,6 @@ function selectAnswer(selectedIdx){
     buttons[q.correct].classList.add('correct');
   }
   
-  // Passer à la question suivante ou afficher le score
   setTimeout(() => {
     currentQuestion++;
     if(currentQuestion < questions.length){
@@ -682,7 +1014,7 @@ function createConfetti(){
   }
 }
 
-// Citations aléatoires
+// Citations
 const citations=[
   "L'amour est la poésie des sens.",
   "Je t'aime plus que tout.",
@@ -711,6 +1043,7 @@ function anim(){
 }
 anim();
 
+// JAUGE AMOUR
 let love = 0;
 
 function addLove(){
@@ -720,9 +1053,105 @@ function addLove(){
     document.getElementById("loveScore").innerText = love + "%";
 
     if(love === 100){
-      alert("❤️ Niveau d'amour maximum atteint ❤️");
+      // Pluie de confetti
+      for(let i=0;i<100;i++){
+        setTimeout(()=>createConfetti(),i*50);
+      }
+      
+      // Transition vers page finale
+      setTimeout(()=>{
+        go(7);
+      },2000);
     }
   }
+}
+
+// PAGE FINALE - Initialisation
+function initFinalPage(){
+  createStarField();
+  createShootingStars();
+  createCrystalParticles();
+  animateCrystalBall();
+  createFireworks();
+}
+
+// Créer le champ d'étoiles
+function createStarField(){
+  const section = document.getElementById('starrySection');
+  
+  for(let i=0;i<300;i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    star.style.width = star.style.height = (Math.random() * 4 + 1) + 'px';
+    section.appendChild(star);
+  }
+}
+
+// Créer des étoiles filantes
+function createShootingStars(){
+  setInterval(()=>{
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.left = Math.random() * 70 + '%';
+    star.style.top = Math.random() * 50 + '%';
+    document.getElementById('starrySection').appendChild(star);
+    setTimeout(()=>star.remove(),3000);
+  },2000);
+}
+
+// Créer les particules de la boule de cristal
+function createCrystalParticles(){
+  const container = document.getElementById('crystalParticles');
+  
+  for(let i=0;i<30;i++){
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = (20 + Math.random() * 60) + '%';
+    particle.style.bottom = '10%';
+    particle.style.setProperty('--x', (Math.random() * 60 - 30) + 'px');
+    particle.style.animationDelay = (Math.random() * 4) + 's';
+    particle.style.animationDuration = (3 + Math.random() * 2) + 's';
+    container.appendChild(particle);
+  }
+}
+
+// Animer le texte de la boule de cristal
+function animateCrystalBall(){
+  const messages = [
+    "Notre Futur...",
+    "Ensemble...",
+    "Pour Toujours...",
+    "❤️ ∞ ❤️"
+  ];
+  
+  let index = 0;
+  setInterval(()=>{
+    const text = document.getElementById('crystalText');
+    text.style.opacity = '0';
+    setTimeout(()=>{
+      text.innerText = messages[index];
+      text.style.opacity = '1';
+      index = (index + 1) % messages.length;
+    },500);
+  },3500);
+}
+
+// Créer des feux d'artifice
+function createFireworks(){
+  setInterval(()=>{
+    for(let i=0;i<25;i++){
+      const firework = document.createElement('div');
+      firework.className = 'firework';
+      firework.style.left = (Math.random() * window.innerWidth) + 'px';
+      firework.style.top = '0px';
+      firework.style.background = ['#ff4d88','#ffd700','#ff8fab','#ff69b4','#8a2be2'][Math.floor(Math.random()*5)];
+      document.body.appendChild(firework);
+      setTimeout(()=>firework.remove(),2000);
+    }
+  },4000);
 }
 </script>
 </body>
