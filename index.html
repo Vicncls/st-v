@@ -252,6 +252,37 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
     opacity:0;
   }
 }
+
+.poeme-container{
+  position:relative;
+  height:320px;
+  overflow:hidden;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  padding:20px;
+  box-shadow:inset 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Texte qui monte du bas vers le haut */
+.poeme-scroll{
+  position:absolute;
+  bottom:-100%;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  line-height:1.7;
+  animation:scrollUp 55s linear forwards;
+}
+
+@keyframes scrollUp{
+  from{ bottom:-100%; }
+  to{ bottom:100%; }
+}
+
+.poeme-scroll p{
+  margin:6px 0;
+}
 </style>
 </head>
 <body>
@@ -296,26 +327,66 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
   </div>
 </div>
 
-<!-- PAGE 4 SOUVENIRS -->
+<!-- PAGE 4 SOUVENIRS AMÉLIORÉE -->
 <div class="page" id="p4">
-  <div class="card">
-    <h2>Boîte à souvenirs ❤️</h2>
-    <p id="citation" style="font-style:italic;margin-bottom:15px;"></p>
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;">
-      <div class="flip"><div class="flip-inner">
-        <div class="flip-front">Souvenir</div>
-        <div class="flip-back">Notre rencontre</div>
-      </div></div>
-      <div class="flip"><div class="flip-inner">
-        <div class="flip-front">Moment</div>
-        <div class="flip-back">Premier fou rire</div>
-      </div></div>
-      <div class="flip"><div class="flip-inner">
-        <div class="flip-front">Secret</div>
-        <div class="flip-back">Je t'aime ❤️</div>
-      </div></div>
+  <div class="card" style="max-width:750px;">
+    <h2 style="
+      font-size:32px;
+      margin-bottom:20px;
+      background:linear-gradient(45deg,#ff4d88,#ff8fab);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    ">
+      Puisque je te le dois ❤️
+    </h2>
+
+    <p id="citation"
+       style="font-style:italic;opacity:0.8;margin-bottom:25px;">
+    </p>
+
+    <div class="poeme-container">
+      <div class="poeme-scroll">
+
+        <p>Je n’ai ni or, ni couronne,</p>
+        <p>des mots, parfois maladroits,</p>
+        <p>Mais Il y a dans tes beaux yeux Hazel,</p>
+        <p>toute la douceur de ta silhouette</p>
+        <p>qui m’enlace avec tendresse à chaque fois</p>
+
+        <br>
+
+        <p>Et si aimer est une douce folie,</p>
+        <p>Alors je veux bien perdre la raison,</p>
+        <p>Car depuis toi, depuis ta vie,</p>
+        <p>Mon cœur perdu a trouvé sa maison.</p>
+
+        <br>
+
+        <p>Je t’aime d’un amour qui tremble et brûle,</p>
+        <p>Qui doute parfois, mais jamais ne ment,</p>
+        <p>Le matin, je pense à toi sans recul,</p>
+        <p>Et le soir, ton sourire me rend vivant.</p>
+
+        <br>
+
+        <p>Je promets mes mots, mes gestes et mes nuits,</p>
+        <p>Je promets mes silences et mes pensées,</p>
+        <p>Je promets que tu seras mon seul abri,</p>
+        <p>Dans la tempête, dans l’amour, dans la beauté.</p>
+
+        <br>
+
+        <p>Quand je doute, je pense à toi,</p>
+        <p>Et la vie retrouve son sens,</p>
+        <p>Justine, mon monde s’illumine,</p>
+        <p>Et tout devient parfait.</p>
+
+      </div>
     </div>
-    <button onclick="go(5)">Suite</button>
+
+    <button onclick="go(5)" style="margin-top:25px;">
+      Suite ❤️
+    </button>
   </div>
 </div>
 
