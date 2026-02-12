@@ -92,7 +92,6 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
   <div class="card">
     <h1 id="typing"></h1>
     <h2 id="compteur"></h2>
-    <img id="slide" src="photo1.jpg" style="width:100%;border-radius:12px">
     <button onclick="go(3)">Suite</button>
   </div>
 </div>
@@ -127,7 +126,24 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
     <p>Qui a dit je t'aime en premier ?</p>
     <button onclick="quiz(true)">Moi</button>
     <button onclick="quiz(false)">Toi</button>
-    <p id="score"></p>
+   
+    <p>Qui est le plus fou ?</p>
+    <button onclick="quiz(false)">Moi</button>
+    <button onclick="quiz(true)">Clairement toi</button>
+
+      <p>Qui est le plus drôle ?</p>
+    <button onclick="quiz(true)">Moi sans discussions</button>
+    <button onclick="quiz(false)">Toi</button>
+
+      <p>Qui est le plus romantique ?</p>
+    <button onclick="quiz(true)">Moi</button>
+    <button onclick="quiz(false)">Pourquoi tu regarde pou Toi ?</button>
+
+      <p>Qui a vu le moins de film</p>
+    <button onclick="quiz(false)">Moi</button>
+    <button onclick="quiz(true)">Toi</button>
+
+     <p id="score"></p>
     <button onclick="go(0)">Recommencer ❤️</button>
   </div>
 </div>
@@ -168,7 +184,7 @@ function type(){
 setTimeout(type,500);
 
 // Compteur
-const date=new Date("2024-06-01");
+const date=new Date("2025-11-10");
 setInterval(()=>{
   let j=Math.floor((new Date()-date)/86400000);
   document.getElementById("compteur").innerText=j+" jours avec toi ❤️";
