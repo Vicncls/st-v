@@ -290,13 +290,13 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
   box-shadow:inset 0 0 20px rgba(0,0,0,0.4);
 }
 .poeme-scroll{
-  position:absolute;bottom:0;width:100%;
+  position:absolute;top:20px;width:100%;
   text-align:center;font-size:18px;line-height:1.7;
   animation:scrollUp 60s linear 1s forwards;
 }
 @keyframes scrollUp{
-  from{bottom:0;}
-  to{bottom:100%;}
+  from{top:20px;}
+  to{top:-400%;}
 }
 .poeme-scroll p{margin:6px 0;}
 
@@ -902,7 +902,7 @@ function createShootingStars(){
 }
 
 function animateCrystalBall(){
-  const messages=["Notre Futur...","Ensemble...","Pour Toujours...","❤️ ∞ ❤️"];
+  const messages=["Notre Futur...","Ensemble...","Evidement","Dans 5 ans...","Le mariage t'espère heinn","molo molo","La boule de crystal est un peu floue... Mais je vois","Du bonheur pour toujours","Chichiiiii"];
   let index=0;
   setInterval(()=>{
     const text=document.getElementById('crystalText');
