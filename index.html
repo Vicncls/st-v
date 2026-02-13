@@ -290,12 +290,12 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
   box-shadow:inset 0 0 20px rgba(0,0,0,0.4);
 }
 .poeme-scroll{
-  position:absolute;bottom:-100%;width:100%;
+  position:absolute;bottom:0;width:100%;
   text-align:center;font-size:18px;line-height:1.7;
-  animation:scrollUp 55s linear forwards;
+  animation:scrollUp 60s linear 1s forwards;
 }
 @keyframes scrollUp{
-  from{bottom:-100%;}
+  from{bottom:0;}
   to{bottom:100%;}
 }
 .poeme-scroll p{margin:6px 0;}
@@ -550,11 +550,11 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
     <p id="citation" style="font-style:italic;opacity:0.8;margin-bottom:25px;"></p>
     <div class="poeme-container">
       <div class="poeme-scroll">
-        <p>Je n'ai ni or, ni couronne,</p>
-        <p>des mots, parfois maladroits,</p>
-        <p>Mais Il y a dans tes beaux yeux Hazel,</p>
-        <p>toute la douceur de ta silhouette</p>
-        <p>qui m'enlace avec tendresse à chaque fois</p>
+        <p>Justine, je n'ai ni or, ni couronne,</p>
+        <p>Seulement des mots, parfois maladroits,</p>
+        <p>Mais il y a dans tes beaux yeux Hazel,</p>
+        <p>toute la douceur de ta silhouette qui</p>
+        <p> m'enlace avec tendresse à chaque fois</p>
         <br>
         <p>Et si aimer est une douce folie,</p>
         <p>Alors je veux bien perdre la raison,</p>
@@ -573,8 +573,8 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
         <br>
         <p>Quand je doute, je pense à toi,</p>
         <p>Et la vie retrouve son sens,</p>
-        <p>Justine, mon monde s'illumine,</p>
-        <p>Et tout devient parfait.</p>
+        <p>Justine, et mon monde s'illumine,</p>
+        <p>Villeret, et tout devient parfait.</p>
       </div>
     </div>
     <button onclick="go(5)" style="margin-top:25px;">Suite ❤️</button>
@@ -659,7 +659,7 @@ button:hover{box-shadow:0 0 15px #ff4d88;}
 
   <!-- TO BE CONTINUED -->
   <div class="final-section" style="background:#000;">
-    <div class="to-be-continued">Veux-tu être<br>ma valentine ?</div>
+    <div class="to-be-continued">To Be<br>Continued...</div>
   </div>
 </div>
 
@@ -902,7 +902,7 @@ function createShootingStars(){
 }
 
 function animateCrystalBall(){
-  const messages=["Notre Futur...","Ensemble","En vrai j'espère qu'on aura un chien","Dans 5 ans...","Le mariage t'espère heinnnn","La boule de cristal est un peu floue mais je vois...","Beaucoup de bonheur ❤️","Chichiiiii"];
+  const messages=["Notre Futur...","Ensemble...","Pour Toujours...","❤️ ∞ ❤️"];
   let index=0;
   setInterval(()=>{
     const text=document.getElementById('crystalText');
