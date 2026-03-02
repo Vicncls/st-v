@@ -25,16 +25,21 @@
       overflow: hidden;
     }
 
-    /* ── LOGIN PAGE ── */
-    #login-page {
+    /* ── PAGES ── */
+    .page {
       position: fixed; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      opacity: 1;
-      transition: opacity 0.8s ease;
+      padding: 40px;
       background: var(--black);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.8s ease;
     }
-    #login-page.fade-out { opacity: 0; pointer-events: none; }
+    .page.active { opacity: 1; pointer-events: all; }
+    .page.fade-out { opacity: 0; pointer-events: none; }
+
+    /* ── PAGE 1 : LOGIN ── */
+    #page-1 { opacity: 1; pointer-events: all; }
 
     .lock-icon {
       width: 48px; height: 48px;
@@ -67,25 +72,23 @@
       animation: rise 1s ease 0.65s forwards;
     }
 
-    #password-input {
+    .pw-input {
       width: 100%;
       background: transparent;
       border: none;
       border-bottom: 1px solid var(--mid-gray);
       color: var(--white);
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 100;
-      font-size: 1.1rem;
+      font-weight: 100; font-size: 1.1rem;
       letter-spacing: 0.15em;
-      padding: 10px 0;
-      outline: none;
+      padding: 10px 0; outline: none;
       text-align: center;
       transition: border-color 0.3s ease;
       caret-color: var(--white);
     }
-    #password-input::placeholder { color: var(--mid-gray); font-size: 0.85rem; letter-spacing: 0.12em; }
-    #password-input:focus { border-bottom-color: var(--white); }
-    #password-input.error { border-bottom-color: #ff3b30; animation: shake 0.4s ease; }
+    .pw-input::placeholder { color: var(--mid-gray); font-size: 0.85rem; letter-spacing: 0.12em; }
+    .pw-input:focus { border-bottom-color: var(--white); }
+    .pw-input.error { border-bottom-color: #ff3b30; animation: shake 0.4s ease; }
 
     .error-msg {
       position: absolute; bottom: -28px; left: 0; right: 0;
@@ -94,7 +97,6 @@
     }
     .error-msg.visible { opacity: 1; }
 
-    /* ── BUTTONS ── */
     .submit-btn {
       margin-top: 52px;
       background: transparent;
@@ -119,7 +121,6 @@
       opacity: 0;
       animation: rise 1s ease 1.05s forwards;
     }
-
     .hint-btn {
       background: transparent;
       border: 1px solid rgba(255,255,255,0.12);
@@ -131,26 +132,16 @@
       border-radius: 980px;
       transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
-    .hint-btn:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.3);
-      color: var(--light-gray);
-    }
-    .hint-btn.active {
-      border-color: rgba(255,255,255,0.45);
-      color: var(--white);
-      background: rgba(255,255,255,0.13);
-    }
+    .hint-btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); color: var(--light-gray); }
+    .hint-btn.active { border-color: rgba(255,255,255,0.45); color: var(--white); background: rgba(255,255,255,0.07); }
 
     .hint-display {
-      margin-top: 22px;
-      min-height: 28px;
+      margin-top: 22px; min-height: 28px;
       display: flex; align-items: center; justify-content: center;
       opacity: 0; transform: translateY(6px);
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .hint-display.visible { opacity: 1; transform: translateY(0); }
-
     .hint-text {
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic; font-weight: 300;
@@ -161,77 +152,128 @@
     /* ── CODE BLOCK ── */
     .code-section {
       margin-top: 52px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
       opacity: 0;
       animation: rise 1s ease 1.25s forwards;
     }
-
     .code-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
+      font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
       color: var(--mid-gray);
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      display: flex; align-items: center; gap: 14px;
     }
-    .code-label::before,
-    .code-label::after {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 1px;
+    .code-label::before, .code-label::after {
+      content: ''; display: block; width: 28px; height: 1px;
       background: rgba(255,255,255,0.15);
     }
-
     .code-string {
       font-family: 'Courier New', Courier, monospace;
       font-size: clamp(0.78rem, 1.5vw, 0.98rem);
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       color: rgba(255,255,255,0.9);
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.28);
       border-radius: 6px;
-      padding: 14px 24px;
-      cursor: pointer;
-      position: relative;
+      padding: 16px 28px; cursor: pointer;
       transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-      user-select: all;
-      word-break: break-all;
-      text-align: center;
+      user-select: all; word-break: break-all; text-align: center;
       max-width: clamp(280px, 55vw, 560px);
     }
-    .code-string:hover {
-      color: #ffffff;
-      border-color: rgba(255,255,255,0.5);
-      background: rgba(255,255,255,0.13);
-    }
-
+    .code-string:hover { color: #ffffff; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.13); }
     .copy-tip {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      transition: color 0.3s ease;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2); transition: color 0.3s ease;
     }
-    .copy-tip.copied { color: rgba(255,255,255,0.9); }
+    .copy-tip.copied { color: rgba(255,255,255,0.55); }
 
-    /* ── INNER PAGE ── */
-    #inner-page {
-      position: fixed; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 60px 40px;
-      background: var(--black);
-      opacity: 0; pointer-events: none;
-      transition: opacity 1s ease 0.4s;
+    /* ── PAGE 2 : MAGIC SQUARE ── */
+    #page-2 { gap: 0; overflow-y: auto; justify-content: center; }
+
+    .p2-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 300; font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--light-gray);
+      letter-spacing: 0.06em; text-align: center;
+      margin-bottom: 10px;
+      opacity: 0; transform: translateY(14px);
     }
-    #inner-page.visible { opacity: 1; pointer-events: all; }
+    #page-2.active .p2-title {
+      animation: rise 0.9s ease 0.2s forwards;
+    }
 
+    .p2-subtitle {
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mid-gray); text-align: center;
+      margin-bottom: 36px;
+      opacity: 0;
+    }
+    #page-2.active .p2-subtitle { animation: rise 0.9s ease 0.4s forwards; }
+
+    .magic-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 36px;
+      opacity: 0;
+    }
+    #page-2.active .magic-grid { animation: rise 0.9s ease 0.6s forwards; }
+
+    .magic-cell {
+      width: clamp(36px, 6vw, 52px);
+      height: clamp(36px, 6vw, 52px);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 100;
+      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.03);
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .magic-cell.hidden {
+      color: transparent;
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.3);
+      border-style: dashed;
+      cursor: default;
+      position: relative;
+    }
+    .magic-cell.hidden::after {
+      content: '?';
+      position: absolute;
+      color: rgba(255,255,255,0.35);
+      font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+    }
+
+    .p2-hint {
+      font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--mid-gray); text-align: center;
+      margin-bottom: 28px;
+      opacity: 0;
+    }
+    #page-2.active .p2-hint { animation: rise 0.9s ease 0.75s forwards; }
+
+    .p2-sum {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 0.85rem; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      text-align: center; margin-bottom: 32px;
+      opacity: 0;
+    }
+    #page-2.active .p2-sum { animation: rise 0.9s ease 0.85s forwards; }
+
+    .p2-input-wrap {
+      position: relative;
+      width: clamp(260px, 40vw, 400px);
+      margin-bottom: 52px;
+      opacity: 0;
+    }
+    #page-2.active .p2-input-wrap { animation: rise 0.9s ease 0.95s forwards; }
+
+    /* ── PAGE 3 : FINAL ── */
     .inner-ornament {
       width: 1px; height: 60px;
       background: linear-gradient(to bottom, transparent, var(--mid-gray), transparent);
@@ -239,7 +281,7 @@
       transform: scaleY(0);
       transition: transform 1.2s ease 1s;
     }
-    #inner-page.visible .inner-ornament { transform: scaleY(1); }
+    #page-3.active .inner-ornament { transform: scaleY(1); }
 
     .inner-title {
       font-family: 'Playfair Display', Georgia, serif;
@@ -251,7 +293,7 @@
       transition: opacity 1s ease 1.2s, transform 1s ease 1.2s;
       max-width: 700px;
     }
-    #inner-page.visible .inner-title { opacity: 1; transform: translateY(0); }
+    #page-3.active .inner-title { opacity: 1; transform: translateY(0); }
 
     .inner-subtitle {
       margin-top: 28px;
@@ -260,15 +302,14 @@
       color: var(--mid-gray);
       opacity: 0; transition: opacity 1s ease 1.6s;
     }
-    #inner-page.visible .inner-subtitle { opacity: 1; }
+    #page-3.active .inner-subtitle { opacity: 1; }
 
     .inner-ornament-bottom {
-      width: 40px; height: 1px;
-      background: var(--mid-gray);
+      width: 40px; height: 1px; background: var(--mid-gray);
       margin-top: 48px;
       opacity: 0; transition: opacity 1s ease 1.8s;
     }
-    #inner-page.visible .inner-ornament-bottom { opacity: 1; }
+    #page-3.active .inner-ornament-bottom { opacity: 1; }
 
     /* ── FIREWORKS ── */
     #fireworks-canvas {
@@ -294,34 +335,30 @@
 </head>
 <body>
 
-  <!-- LOGIN PAGE -->
-  <div id="login-page">
+  <!-- PAGE 1 : LOGIN -->
+  <div class="page active" id="page-1">
     <div class="lock-icon">
       <svg viewBox="0 0 24 24">
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
         <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
       </svg>
     </div>
-
     <p class="prompt">Veuillez entrer le mot de passe</p>
-
     <div class="input-wrap">
-      <input type="password" id="password-input" placeholder="mot de passe" autocomplete="off" spellcheck="false"/>
-      <span class="error-msg" id="error-msg">Mot de passe incorrect</span>
+      <input type="password" class="pw-input" id="input-1" placeholder="mot de passe" autocomplete="off" spellcheck="false"/>
+      <span class="error-msg" id="error-1">Mot de passe incorrect</span>
     </div>
-
-    <button class="submit-btn" id="submit-btn">Entrer</button>
-
+    <button class="submit-btn" onclick="attempt(1)">Entrer</button>
     <div class="hints-wrap">
       <button class="hint-btn" id="hint-btn-0" onclick="toggleHint(0)">Indice 1</button>
       <button class="hint-btn" id="hint-btn-1" onclick="toggleHint(1)">Indice 2</button>
       <button class="hint-btn" id="hint-btn-2" onclick="toggleHint(2)">Indice 3</button>
+            <button class="hint-btn" id="hint-btn-3" onclick="toggleHint(3)">Indice 4</button>
+
     </div>
     <div class="hint-display" id="hint-display">
       <span class="hint-text" id="hint-text"></span>
     </div>
-
-    <!-- CODE BLOCK -->
     <div class="code-section">
       <div class="code-label">clé d'accès</div>
       <div class="code-string" id="code-string" onclick="copyCode()">
@@ -331,34 +368,72 @@
     </div>
   </div>
 
-  <!-- FIREWORKS CANVAS -->
-  <canvas id="fireworks-canvas"></canvas>
+  <!-- PAGE 2 : CARRÉ MAGIQUE -->
+  <div class="page" id="page-2">
+    <p class="p2-title">Trouve la valeur manquante</p>
+    <p class="p2-subtitle">Chaque ligne, colonne et diagonale a la même somme</p>
 
-  <!-- INNER PAGE -->
-  <div id="inner-page">
+    <div class="magic-grid" id="magic-grid"></div>
+
+    <p class="p2-sum" id="p2-sum"></p>
+    <p class="p2-hint">Entre la valeur manquante comme mot de passe</p>
+
+    <div class="p2-input-wrap">
+      <input type="text" class="pw-input" id="input-2" placeholder="valeur manquante" autocomplete="off" spellcheck="false" inputmode="numeric"/>
+      <span class="error-msg" id="error-2">Mauvaise réponse</span>
+    </div>
+    <button class="submit-btn" onclick="attempt(2)">Entrer</button>
+  </div>
+
+  <!-- PAGE 3 : FINAL -->
+  <div class="page" id="page-3">
     <div class="inner-ornament"></div>
     <h1 class="inner-title">Tu as trouvé la clé.<br><em>Maintenant, regarde sous ton lit, dans le tiroir (cherche bien)</em></h1>
     <p class="inner-subtitle">043</p>
     <div class="inner-ornament-bottom"></div>
   </div>
 
+  <!-- FIREWORKS -->
+  <canvas id="fireworks-canvas"></canvas>
+
   <script>
-    /* ─── COPY CODE ─── */
-    function copyCode() {
-      const code = document.getElementById("code-string").textContent.trim();
-      const tip  = document.getElementById("copy-tip");
-      navigator.clipboard.writeText(code).then(() => {
-        tip.textContent = "copié ✓";
-        tip.classList.add("copied");
-        setTimeout(() => { tip.textContent = "cliquer pour copier"; tip.classList.remove("copied"); }, 2000);
+    /* ─── MAGIC SQUARE DATA ─── */
+    const SQUARE = [
+      [30,39,48, 1,10,19,28],
+      [38,47, 7, 9,18,27,29],
+      [46, 6, 8,17,26,35,37],
+      [ 5,14,16, 0,34,36,45],  // 0 = hidden (value = 25)
+      [13,15,24,33,42,44, 4],
+      [21,23,32,41,43, 3,12],
+      [22,31,40,49, 2,11,20]
+    ];
+    const HIDDEN_VAL = 25;
+    const MAGIC_SUM  = 175;
+
+    // Build grid
+    const grid = document.getElementById("magic-grid");
+    SQUARE.forEach(row => {
+      row.forEach(val => {
+        const cell = document.createElement("div");
+        cell.className = "magic-cell" + (val === 0 ? " hidden" : "");
+        cell.textContent = val === 0 ? "" : val;
+        grid.appendChild(cell);
       });
-    }
+    });
+    document.getElementById("p2-sum").textContent = `Somme magique = ${MAGIC_SUM}`;
+
+    /* ─── PASSWORDS ─── */
+    const PASSWORDS = {
+      1: "Bébé Cadum",
+      2: "25"         // magic square answer
+    };
 
     /* ─── HINTS ─── */
     const HINTS = [
       "7 × 7",
       "Lis-moi de l'extérieur vers le cœur",
-      "ê = é"
+      "ê = é",
+      "t'y a cru heinnn"
     ];
     let activeHint = -1;
 
@@ -366,7 +441,6 @@
       const display = document.getElementById("hint-display");
       const text    = document.getElementById("hint-text");
       const btns    = document.querySelectorAll(".hint-btn");
-
       if (activeHint === i) {
         display.classList.remove("visible");
         btns[i].classList.remove("active");
@@ -385,156 +459,165 @@
       }
     }
 
-    /* ─── PASSWORD ─── */
-    const PASSWORD = "Bébé Cadum";
-    const input     = document.getElementById("password-input");
-    const btn       = document.getElementById("submit-btn");
-    const errorMsg  = document.getElementById("error-msg");
-    const loginPage = document.getElementById("login-page");
-    const innerPage = document.getElementById("inner-page");
+    /* ─── COPY CODE ─── */
+    function copyCode() {
+      const code = document.getElementById("code-string").textContent.trim();
+      const tip  = document.getElementById("copy-tip");
+      navigator.clipboard.writeText(code).then(() => {
+        tip.textContent = "copié ✓";
+        tip.classList.add("copied");
+        setTimeout(() => { tip.textContent = "cliquer pour copier"; tip.classList.remove("copied"); }, 2000);
+      });
+    }
 
-    function attempt() {
-      if (input.value === PASSWORD) {
-        loginPage.classList.add("fade-out");
+    /* ─── NAVIGATION ─── */
+    function attempt(page) {
+      const input    = document.getElementById(`input-${page}`);
+      const errorEl  = document.getElementById(`error-${page}`);
+      const val      = input.value.trim();
+      const expected = PASSWORDS[page];
+
+      if (val === expected) {
+        const current = document.getElementById(`page-${page}`);
+        current.classList.add("fade-out");
         setTimeout(() => {
-          loginPage.style.display = "none";
-          innerPage.classList.add("visible");
-          launchFireworks();
+          current.classList.remove("active", "fade-out");
+          if (page === 2) {
+            // page 3 = final
+            const next = document.getElementById("page-3");
+            next.classList.add("active");
+            launchFireworks();
+          } else {
+            const next = document.getElementById(`page-${page + 1}`);
+            next.classList.add("active");
+          }
         }, 900);
       } else {
         input.classList.add("error");
-        errorMsg.classList.add("visible");
+        errorEl.classList.add("visible");
         input.value = "";
         setTimeout(() => {
           input.classList.remove("error");
-          errorMsg.classList.remove("visible");
+          errorEl.classList.remove("visible");
         }, 2000);
       }
     }
 
-    btn.addEventListener("click", attempt);
-    input.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
+    // Enter key support
+    document.getElementById("input-1").addEventListener("keydown", e => { if (e.key === "Enter") attempt(1); });
+    document.getElementById("input-2").addEventListener("keydown", e => { if (e.key === "Enter") attempt(2); });
 
     /* ─── FIREWORKS ─── */
     const canvas = document.getElementById("fireworks-canvas");
     const ctx    = canvas.getContext("2d");
     let raf = null, particles = [], rockets = [];
 
-    const PALETTE = [
-      "#ffffff","#e8e8e8","#d0d0d0","#b0b0b0",
-      "#909090","#c8c8c8","#f0f0f0","#a0a0a0",
-      "#ffffff","#ffffff","#d8d8d8"
-    ];
+    const PALETTE = ["#ffffff","#e8e8e8","#d0d0d0","#b0b0b0","#909090","#c8c8c8","#f0f0f0","#a0a0a0","#ffffff","#ffffff","#d8d8d8"];
 
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 
     class Particle {
       constructor(x, y, color) {
-        this.x = x; this.y = y; this.color = color;
-        const angle = Math.random() * Math.PI * 2, speed = 1.5 + Math.random() * 5;
-        this.vx = Math.cos(angle) * speed;
-        this.vy = Math.sin(angle) * speed - 1.5;
-        this.alpha = 1; this.decay = 0.012 + Math.random() * 0.018;
-        this.size = 1.5 + Math.random() * 2.5; this.gravity = 0.06; this.trail = [];
+        this.x=x; this.y=y; this.color=color;
+        const angle=Math.random()*Math.PI*2, speed=1.5+Math.random()*5;
+        this.vx=Math.cos(angle)*speed; this.vy=Math.sin(angle)*speed-1.5;
+        this.alpha=1; this.decay=0.012+Math.random()*0.018;
+        this.size=1.5+Math.random()*2.5; this.gravity=0.06; this.trail=[];
       }
       update() {
-        this.trail.push({x: this.x, y: this.y, a: this.alpha});
-        if (this.trail.length > 6) this.trail.shift();
-        this.vy += this.gravity; this.vx *= 0.98;
-        this.x += this.vx; this.y += this.vy; this.alpha -= this.decay;
+        this.trail.push({x:this.x,y:this.y,a:this.alpha});
+        if(this.trail.length>6) this.trail.shift();
+        this.vy+=this.gravity; this.vx*=0.98;
+        this.x+=this.vx; this.y+=this.vy; this.alpha-=this.decay;
       }
       draw() {
-        for (let i = 0; i < this.trail.length; i++) {
-          const t = this.trail[i];
-          ctx.beginPath(); ctx.arc(t.x, t.y, this.size * 0.5, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = t.a * (i / this.trail.length) * 0.4 * this.alpha;
-          ctx.fill();
+        for(let i=0;i<this.trail.length;i++){
+          const t=this.trail[i];
+          ctx.beginPath(); ctx.arc(t.x,t.y,this.size*0.5,0,Math.PI*2);
+          ctx.fillStyle=this.color; ctx.globalAlpha=t.a*(i/this.trail.length)*0.4*this.alpha; ctx.fill();
         }
-        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color; ctx.globalAlpha = this.alpha; ctx.fill();
+        ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fillStyle=this.color; ctx.globalAlpha=this.alpha; ctx.fill();
       }
-      dead() { return this.alpha <= 0; }
+      dead(){return this.alpha<=0;}
     }
 
     class Ring {
-      constructor(x, y, color) { this.x=x; this.y=y; this.color=color; this.r=0; this.maxR=60+Math.random()*60; this.alpha=0.8; }
-      update() { this.r += 3; this.alpha -= 0.03; }
-      draw() {
-        ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-        ctx.strokeStyle = this.color; ctx.lineWidth = 1.5;
-        ctx.globalAlpha = Math.max(0, this.alpha); ctx.stroke();
+      constructor(x,y,color){this.x=x;this.y=y;this.color=color;this.r=0;this.maxR=60+Math.random()*60;this.alpha=0.8;}
+      update(){this.r+=3;this.alpha-=0.03;}
+      draw(){
+        ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.strokeStyle=this.color;ctx.lineWidth=1.5;
+        ctx.globalAlpha=Math.max(0,this.alpha);ctx.stroke();
       }
-      dead() { return this.r >= this.maxR || this.alpha <= 0; }
+      dead(){return this.r>=this.maxR||this.alpha<=0;}
     }
 
     class Rocket {
-      constructor() {
-        this.x  = canvas.width  * (0.15 + Math.random() * 0.7);
-        this.y  = canvas.height + 10;
-        this.tx = canvas.width  * (0.1  + Math.random() * 0.8);
-        this.ty = canvas.height * (0.1  + Math.random() * 0.5);
-        const dx=this.tx-this.x, dy=this.ty-this.y, dist=Math.hypot(dx,dy), speed=10+Math.random()*6;
-        this.vx=(dx/dist)*speed; this.vy=(dy/dist)*speed;
+      constructor(){
+        this.x=canvas.width*(0.15+Math.random()*0.7); this.y=canvas.height+10;
+        this.tx=canvas.width*(0.1+Math.random()*0.8); this.ty=canvas.height*(0.1+Math.random()*0.5);
+        const dx=this.tx-this.x,dy=this.ty-this.y,dist=Math.hypot(dx,dy),speed=10+Math.random()*6;
+        this.vx=(dx/dist)*speed;this.vy=(dy/dist)*speed;
         this.color=PALETTE[Math.floor(Math.random()*PALETTE.length)];
-        this.trail=[]; this.exploded=false;
+        this.trail=[];this.exploded=false;
       }
-      update() {
+      update(){
         this.trail.push({x:this.x,y:this.y});
-        if (this.trail.length>10) this.trail.shift();
-        this.x+=this.vx; this.y+=this.vy; this.vy+=0.12;
-        if (this.y<=this.ty || Math.hypot(this.x-this.tx,this.y-this.ty)<20) this.explode();
+        if(this.trail.length>10)this.trail.shift();
+        this.x+=this.vx;this.y+=this.vy;this.vy+=0.12;
+        if(this.y<=this.ty||Math.hypot(this.x-this.tx,this.y-this.ty)<20)this.explode();
       }
-      explode() {
+      explode(){
         this.exploded=true;
-        const c1=this.color, c2=PALETTE[Math.floor(Math.random()*PALETTE.length)];
-        for (let i=0;i<80+Math.floor(Math.random()*80);i++)
+        const c1=this.color,c2=PALETTE[Math.floor(Math.random()*PALETTE.length)];
+        for(let i=0;i<80+Math.floor(Math.random()*80);i++)
           particles.push(new Particle(this.x,this.y,Math.random()<0.5?c1:c2));
-        for (let r=0;r<3;r++) particles.push(new Ring(this.x,this.y,this.color));
-        for (let s=0;s<16;s++) {
-          const a=(s/16)*Math.PI*2, sp=2+Math.random()*4;
+        for(let r=0;r<3;r++)particles.push(new Ring(this.x,this.y,this.color));
+        for(let s=0;s<16;s++){
+          const a=(s/16)*Math.PI*2,sp=2+Math.random()*4;
           const p=new Particle(this.x,this.y,"#ffffff");
-          p.vx=Math.cos(a)*sp; p.vy=Math.sin(a)*sp; p.size=1; p.decay=0.025;
+          p.vx=Math.cos(a)*sp;p.vy=Math.sin(a)*sp;p.size=1;p.decay=0.025;
           particles.push(p);
         }
       }
-      draw() {
-        for (let i=0;i<this.trail.length;i++) {
-          const t=this.trail[i]; ctx.beginPath(); ctx.arc(t.x,t.y,2,0,Math.PI*2);
-          ctx.fillStyle=this.color; ctx.globalAlpha=(i/this.trail.length)*0.6; ctx.fill();
+      draw(){
+        for(let i=0;i<this.trail.length;i++){
+          const t=this.trail[i];ctx.beginPath();ctx.arc(t.x,t.y,2,0,Math.PI*2);
+          ctx.fillStyle=this.color;ctx.globalAlpha=(i/this.trail.length)*0.6;ctx.fill();
         }
-        ctx.beginPath(); ctx.arc(this.x,this.y,3,0,Math.PI*2);
-        ctx.fillStyle="#ffffff"; ctx.globalAlpha=1; ctx.fill();
+        ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);
+        ctx.fillStyle="#ffffff";ctx.globalAlpha=1;ctx.fill();
       }
-      dead() { return this.exploded; }
+      dead(){return this.exploded;}
     }
 
-    function loop() {
-      ctx.globalAlpha=1; ctx.fillStyle="rgba(0,0,0,0.18)";
+    function loop(){
+      ctx.globalAlpha=1;ctx.fillStyle="rgba(0,0,0,0.18)";
       ctx.fillRect(0,0,canvas.width,canvas.height);
-      for (let i=rockets.length-1;i>=0;i--) {
+      for(let i=rockets.length-1;i>=0;i--){
         rockets[i].update();
-        if (!rockets[i].exploded) rockets[i].draw();
-        if (rockets[i].dead()) rockets.splice(i,1);
+        if(!rockets[i].exploded)rockets[i].draw();
+        if(rockets[i].dead())rockets.splice(i,1);
       }
-      for (let i=particles.length-1;i>=0;i--) {
-        particles[i].update(); particles[i].draw();
-        if (particles[i].dead()) particles.splice(i,1);
+      for(let i=particles.length-1;i>=0;i--){
+        particles[i].update();particles[i].draw();
+        if(particles[i].dead())particles.splice(i,1);
       }
-      ctx.globalAlpha=1; raf=requestAnimationFrame(loop);
+      ctx.globalAlpha=1;raf=requestAnimationFrame(loop);
     }
 
-    function scheduleRocket(delay) { return setTimeout(()=>rockets.push(new Rocket()),delay); }
+    function scheduleRocket(d){return setTimeout(()=>rockets.push(new Rocket()),d);}
 
-    function launchFireworks() {
-      resize(); canvas.classList.add("active");
-      for (let i=0;i<5;i++) scheduleRocket(i*180);
+    function launchFireworks(){
+      resize();canvas.classList.add("active");
+      for(let i=0;i<5;i++)scheduleRocket(i*180);
       let t=1000;
-      while (t<6000) { scheduleRocket(t+Math.random()*400); t+=250+Math.random()*350; }
-      for (let i=0;i<12;i++) scheduleRocket(6000+i*90);
+      while(t<6000){scheduleRocket(t+Math.random()*400);t+=250+Math.random()*350;}
+      for(let i=0;i<12;i++)scheduleRocket(6000+i*90);
       loop();
-      setTimeout(()=>{ cancelAnimationFrame(raf); canvas.classList.remove("active");
-        ctx.clearRect(0,0,canvas.width,canvas.height); particles=[]; rockets=[]; },8500);
+      setTimeout(()=>{cancelAnimationFrame(raf);canvas.classList.remove("active");
+        ctx.clearRect(0,0,canvas.width,canvas.height);particles=[];rockets=[];},8500);
     }
 
     window.addEventListener("resize", resize);
